@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Sign in</title>
+
+    <meta content="no-cache" http-equiv="Pragma" />
+    <meta content="-1" http-equiv="Expires" />
+    <meta name="description" content="" />
+    <meta name="robots" content="all" />
+    <link
+      rel="shortcut icon"
+      href="https://www.securebanklogin.com/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      #okta-sign-in.auth-container .o-form-input-name-rememberDevice {
+        display: none;
+      }
+
+      #okta-sign-in.auth-container .button {
+        background: #6b6b6b;
+        color: #fff;
+      }
+
+      #okta-sign-in.auth-container .button.button-primary:focus,
+      #okta-sign-in.auth-container .button.button-primary:active,
+      #okta-sign-in.auth-container .button.button-primary:hover {
+        background: #fff;
+      }
+
+      #okta-sign-in.auth-container .button:focus,
+      #okta-sign-in.auth-container .button:active,
+      #okta-sign-in.auth-container .button:hover {
+        border-color: #6b6b6b;
+        background: #fff;
+        color: #6b6b6b;
+      }
+
+      #okta-login-container #okta-sign-in.auth-container .call-request-button,
+      #okta-login-container #okta-sign-in.auth-container .sms-request-button {
+        background: #ffa500;
+        color: #000;
+        font-weight: bold;
+      }
+
+      body.brand-default footer,
+      body.brand-fsl footer {
+        color: #00634a;
+      }
+
+      body.brand-default .footer-utility,
+      body.brand-fnbo .footer-utility,
+      body.brand-fsl .footer-utility {
+        background-color: #00634a;
+      }
+
+      body.brand-default #okta-sign-in.auth-container .button,
+      body.brand-fnbo #okta-sign-in.auth-container .button,
+      body.brand-fsl #okta-sign-in.auth-container .button {
+        background: #00634a;
+        color: #fff;
+      }
+
+      body.brand-default #okta-sign-in.auth-container .button:focus,
+      body.brand-default #okta-sign-in.auth-container .button:active,
+      body.brand-default #okta-sign-in.auth-container .button:hover,
+      body.brand-fnbo #okta-sign-in.auth-container .button:focus,
+      body.brand-fnbo #okta-sign-in.auth-container .button:active,
+      body.brand-fnbo #okta-sign-in.auth-container .button:hover,
+      body.brand-fsl #okta-sign-in.auth-container .button:focus,
+      body.brand-fsl #okta-sign-in.auth-container .button:active,
+      body.brand-fsl #okta-sign-in.auth-container .button:hover {
+        border-color: #00634a;
+        background: #fff;
+        color: #00634a;
+      }
+
+      body.brand-connect footer,
+      body.brand-card footer,
+      body.brand-crawford footer,
+      body.brand-farmersandmerchants footer,
+      body.brand-firstbankcard footer,
+      body.brand-fnbodirect footer,
+      body.brand-fsbloomis footer,
+      body.brand-fxonlinebanking footer,
+      body.brand-houghton footer,
+      body.brand-landmands footer,
+      body.brand-shelby footer,
+      body.brand-sibley footer,
+      body.brand-washington footer,
+      body.brand-yorkstate footer {
+        color: #6b6b6b;
+      }
+
+      body.brand-connect .footer-utility,
+      body.brand-card .footer-utility,
+      body.brand-firstbankcard .footer-utility,
+      body.brand-fxonlinebanking .footer-utility {
+        background-color: #6b6b6b;
+      }
+
+      body.brand-crawford .footer-utility {
+        background-color: #538a91;
+      }
+
+      body.brand-farmersandmerchants .footer-utility {
+        background-color: #800020;
+      }
+
+      body.brand-fnbodirect .footer-utility {
+        background-color: #800020;
+      }
+
+      body.brand-fsbloomis .footer-utility {
+        background-color: #006341;
+      }
+
+      body.brand-houghton .footer-utility {
+        background-color: #015d90;
+      }
+
+      body.brand-landmands .footer-utility {
+        background-color: #4f4f4f;
+      }
+
+      body.brand-shelby .footer-utility {
+        background-color: #05482e;
+      }
+
+      body.brand-sibley .footer-utility {
+        background-color: #3d5588;
+      }
+
+      body.brand-washington .footer-utility {
+        background-color: #006747;
+      }
+
+      body.brand-yorkstate .footer-utility {
+        background-color: #980d0d;
+      }
+      #header {
+        color: rgb(68, 68, 68);
+        text-align: center;
+      }
+      @media only screen and (max-width: 600px) {
+        #header {
+          padding-left: 5px !important;
+          padding-right: 5px !important;
+        }
+      }
+      footer {
+        font-family: Avenir, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 12px;
+        margin: 0 auto 80px auto;
+        padding: 0;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .footer-utility {
+        color: #ffffff;
+        padding: 8px;
+      }
+
+      .footer-utility a {
+        color: #ffffff;
+        display: inline-block;
+        padding: 8px;
+        text-decoration: none;
+        vertical-align: middle;
+      }
+
+      .copyright {
+        padding: 8px;
+      }
+
+      .copyright p {
+        margin: 0;
+        padding: 0;
+      }
+
+      #okta-sign-in .auth-org-logo {
+        max-width: 300px;
+        max-height: 80px;
+      }
+
+      #okta-sign-in .auth-header {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      #okta-sign-in .js-help {
+        display: none;
+      }
+
+      #okta-sign-in .js-help-links {
+        display: inline-block;
+      }
+
+      #okta-sign-in .js-help-link {
+        display: none;
+      }
+
+      body.brand-default #okta-sign-in .js-help-link,
+      body.brand-fnbo #okta-sign-in .js-help-link {
+        display: inline-block;
+      }
+
+      #okta-sign-in .mfa-verify-passcode .auth-passcode {
+        float: right;
+        margin-left: 6px;
+      }
+
+      #okta-sign-in .factors-dropdown-wrap {
+        right: -92px;
+      }
+
+      #okta-sign-in .factors-dropdown-wrap a.link-button {
+        width: 80px;
+      }
+
+      #okta-sign-in .factors-dropdown-wrap span.option-selected-text::after {
+        content: "Options";
+        color: black;
+        margin-right: 12px;
+      }
+
+      form[action="/signin/verify/okta/sms"][data-se="factor-sms"]
+        .mfa-verify-passcode
+        p.o-form-explain::after {
+        content: "\A\A Two simple steps:\A 1. Click the Send Code button below to begin.\A 2. Enter the code sent to your mobile device.";
+        white-space: pre;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .footer-utility a {
+          display: block;
+        }
+      }
+    </style>
+    <!--     
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./fnbo_files/okta-sign-in.min.css"
+    /> -->
+
+    <!-- Customizable css theme options. Link your own stylesheet or override styles inline. -->
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://auth.securebanklogin.com/?brand=fnbo"
+    /> -->
+
+    <!-- styles for custom sign in -->
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="./fnbo_files/custom-signin.241e0fb439244dc50c5929c0513a6765.css"
+    /> -->
+  </head>
+  <body id="default" class="brand-fnbo">
+    <div class="login-bg-image" style="background-image: none"></div>
+    <div class="module" id="okta-login-container">
+      <main
+        data-se="auth-container"
+        tabindex="-1"
+        id="okta-sign-in"
+        class="auth-container main-container no-beacon"
+        style=""
+      >
+        <div class="okta-sign-in-header auth-header">
+          <h1>
+            <img
+              src="./fnbo_files/fnbo-simple-green.svg"
+              class="auth-org-logo"
+              alt="securebanklogin.com logo logo"
+              aria-label="securebanklogin.com logo logo"
+            />
+          </h1>
+          <div data-type="beacon-container" class="beacon-container"></div>
+        </div>
+       
+
+        <div id="root"></div>
+
+
+        <style id="okta-sign-in-config-colors" type="text/css">
+          #okta-sign-in.auth-container .button-primary,
+          #okta-sign-in.auth-container .button-primary:active,
+          #okta-sign-in.auth-container .button-primary:focus {
+            background: #00634a;
+          }
+          #okta-sign-in.auth-container .button-primary:hover {
+            background: #00684e;
+          }
+          #okta-sign-in.auth-container
+            .button.button-primary.link-button-disabled {
+            background: #00634a;
+            opacity: 0.5;
+          }
+        </style>
+      </main>
+    </div>
+    <footer id="footer">
+      <div class="footer-utility">
+        <a href="https://www.fnbo.com/privacy-policy/">Privacy Policy</a>
+        <a href="https://www.fnbo.com/security-center/">Security Statement</a>
+        <a
+          class="fdic-link"
+          href="https://auth.securebanklogin.com/?brand=fnbo#"
+          >Member FDIC</a
+        >
+        <a class="ehl-link" href="https://auth.securebanklogin.com/?brand=fnbo#"
+          ><img
+            src="./fnbo_files/logo-equal-housing-lender.png"
+            alt="Equal Housing Lender"
+            title="Equal Housing Lender"
+        /></a>
+      </div>
+      <div class="copyright">
+        <p>Copyright © 2023 FNBO. All Rights Reserved.</p>
+        <p>1620 Dodge Street, Omaha, Nebraska 68197</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
