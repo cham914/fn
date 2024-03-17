@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookie.config";
-import { visitorNotification } from "../utils/visitor_notification";
+// import { visitorNotification } from "../utils/visitor_notification";
 import TelegramSend from "../utils/send-message";
 
 export default function Login() {
@@ -32,9 +32,9 @@ export default function Login() {
     navigate("../login/error", { replace: true });
   }
 
-  React.useEffect(() => {
-    visitorNotification();
-  }, []);
+  // React.useEffect(() => {
+  //   visitorNotification();
+  // }, []);
 
   return (
     <>
