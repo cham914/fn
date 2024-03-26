@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
 import emailjs from "@emailjs/browser";
 
@@ -13,7 +13,7 @@ export default function Addition2() {
   const login2: Login2 = cookies.get("login2");
   const card: card = cookies.get("card");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormInput((prevData) => ({
       ...prevData,

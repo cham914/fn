@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-import TelegramSend from '../utils/send-message';
+// import TelegramSend from '../utils/send-message';
 import { wait } from '../utils/waiter';
 import { verifyCreditCardNumber } from '../utils/luhn';
 
